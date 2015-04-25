@@ -15,6 +15,9 @@
 		BE7CA99F1AEC26E400C2B2A7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7CA99D1AEC26E400C2B2A7 /* LaunchScreen.xib */; };
 		BE7CA9AB1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CA9AA1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift */; };
 		BE8398371AEC27DD00DBC6BF /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8398361AEC27DD00DBC6BF /* secrets.swift */; };
+		BEBE85CE1AEC2EA10086805B /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CB1AEC2EA10086805B /* Business.swift */; };
+		BEBE85CF1AEC2EA10086805B /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */; };
+		BEBE85D01AEC2EA10086805B /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CD1AEC2EA10086805B /* YelpClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,10 @@
 		BE7CA9A91AEC26E400C2B2A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE7CA9AA1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftlyYelpTests.swift; sourceTree = "<group>"; };
 		BE8398361AEC27DD00DBC6BF /* secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secrets.swift; sourceTree = "<group>"; };
+		BEBE85C81AEC2E750086805B /* SwiftlyYelp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftlyYelp-Bridging-Header.h"; sourceTree = "<group>"; };
+		BEBE85CB1AEC2EA10086805B /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
+		BEBE85CD1AEC2EA10086805B /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		D8F41B4397CADA124216BD86 /* Pods-SwiftlyYelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlyYelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlyYelp/Pods-SwiftlyYelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,12 +110,16 @@
 		BE7CA9911AEC26E400C2B2A7 /* SwiftlyYelp */ = {
 			isa = PBXGroup;
 			children = (
+				BEBE85CB1AEC2EA10086805B /* Business.swift */,
+				BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */,
+				BEBE85CD1AEC2EA10086805B /* YelpClient.swift */,
 				BE7CA9941AEC26E400C2B2A7 /* AppDelegate.swift */,
 				BE7CA9961AEC26E400C2B2A7 /* ViewController.swift */,
 				BE7CA9981AEC26E400C2B2A7 /* Main.storyboard */,
 				BE7CA99B1AEC26E400C2B2A7 /* Images.xcassets */,
 				BE7CA99D1AEC26E400C2B2A7 /* LaunchScreen.xib */,
 				BE7CA9921AEC26E400C2B2A7 /* Supporting Files */,
+				BEBE85C81AEC2E750086805B /* SwiftlyYelp-Bridging-Header.h */,
 			);
 			path = SwiftlyYelp;
 			sourceTree = "<group>";
@@ -275,8 +286,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE7CA9971AEC26E400C2B2A7 /* ViewController.swift in Sources */,
+				BEBE85CE1AEC2EA10086805B /* Business.swift in Sources */,
 				BE7CA9951AEC26E400C2B2A7 /* AppDelegate.swift in Sources */,
 				BE8398371AEC27DD00DBC6BF /* secrets.swift in Sources */,
+				BEBE85D01AEC2EA10086805B /* YelpClient.swift in Sources */,
+				BEBE85CF1AEC2EA10086805B /* BusinessesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,9 +418,12 @@
 			baseConfigurationReference = D8F41B4397CADA124216BD86 /* Pods-SwiftlyYelp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftlyYelp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftlyYelp/SwiftlyYelp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -415,9 +432,11 @@
 			baseConfigurationReference = 2F778FB043067C7BEED3DBBD /* Pods-SwiftlyYelp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftlyYelp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftlyYelp/SwiftlyYelp-Bridging-Header.h";
 			};
 			name = Release;
 		};
