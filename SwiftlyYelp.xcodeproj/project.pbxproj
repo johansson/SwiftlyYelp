@@ -13,6 +13,7 @@
 		BE7CA99C1AEC26E400C2B2A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7CA99B1AEC26E400C2B2A7 /* Images.xcassets */; };
 		BE7CA99F1AEC26E400C2B2A7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7CA99D1AEC26E400C2B2A7 /* LaunchScreen.xib */; };
 		BE7CA9AB1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CA9AA1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift */; };
+		BE8398371AEC27DD00DBC6BF /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8398361AEC27DD00DBC6BF /* secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		BE7CA9A41AEC26E400C2B2A7 /* SwiftlyYelpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftlyYelpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7CA9A91AEC26E400C2B2A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE7CA9AA1AEC26E400C2B2A7 /* SwiftlyYelpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftlyYelpTests.swift; sourceTree = "<group>"; };
+		BE8398361AEC27DD00DBC6BF /* secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		BE7CA9921AEC26E400C2B2A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE8398361AEC27DD00DBC6BF /* secrets.swift */,
 				BE7CA9931AEC26E400C2B2A7 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -214,6 +217,7 @@
 			files = (
 				BE7CA9971AEC26E400C2B2A7 /* ViewController.swift in Sources */,
 				BE7CA9951AEC26E400C2B2A7 /* AppDelegate.swift in Sources */,
+				BE8398371AEC27DD00DBC6BF /* secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				BE7CA9B01AEC26E400C2B2A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE7CA9B11AEC26E400C2B2A7 /* Build configuration list for PBXNativeTarget "SwiftlyYelpTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				BE7CA9B31AEC26E400C2B2A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
