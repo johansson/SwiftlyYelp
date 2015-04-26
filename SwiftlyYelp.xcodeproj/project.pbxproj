@@ -18,6 +18,7 @@
 		BEBE85CE1AEC2EA10086805B /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CB1AEC2EA10086805B /* Business.swift */; };
 		BEBE85CF1AEC2EA10086805B /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */; };
 		BEBE85D01AEC2EA10086805B /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85CD1AEC2EA10086805B /* YelpClient.swift */; };
+		BEBE85D51AEC4A570086805B /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE85D41AEC4A570086805B /* BusinessCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		BEBE85CB1AEC2EA10086805B /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
 		BEBE85CD1AEC2EA10086805B /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
+		BEBE85D41AEC4A570086805B /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		D8F41B4397CADA124216BD86 /* Pods-SwiftlyYelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftlyYelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftlyYelp/Pods-SwiftlyYelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,12 +112,10 @@
 		BE7CA9911AEC26E400C2B2A7 /* SwiftlyYelp */ = {
 			isa = PBXGroup;
 			children = (
-				BEBE85CB1AEC2EA10086805B /* Business.swift */,
-				BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */,
-				BEBE85CD1AEC2EA10086805B /* YelpClient.swift */,
+				BEBE85D11AEC33F40086805B /* Models */,
+				BEBE85D21AEC340E0086805B /* ViewControllers */,
 				BE7CA9941AEC26E400C2B2A7 /* AppDelegate.swift */,
-				BE7CA9961AEC26E400C2B2A7 /* ViewController.swift */,
-				BE7CA9981AEC26E400C2B2A7 /* Main.storyboard */,
+				BEBE85D31AEC342C0086805B /* Views */,
 				BE7CA99B1AEC26E400C2B2A7 /* Images.xcassets */,
 				BE7CA99D1AEC26E400C2B2A7 /* LaunchScreen.xib */,
 				BE7CA9921AEC26E400C2B2A7 /* Supporting Files */,
@@ -127,6 +127,7 @@
 		BE7CA9921AEC26E400C2B2A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEBE85CD1AEC2EA10086805B /* YelpClient.swift */,
 				BE8398361AEC27DD00DBC6BF /* secrets.swift */,
 				BE7CA9931AEC26E400C2B2A7 /* Info.plist */,
 			);
@@ -148,6 +149,32 @@
 				BE7CA9A91AEC26E400C2B2A7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEBE85D11AEC33F40086805B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BEBE85CB1AEC2EA10086805B /* Business.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BEBE85D21AEC340E0086805B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEBE85CC1AEC2EA10086805B /* BusinessesViewController.swift */,
+				BE7CA9961AEC26E400C2B2A7 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BEBE85D31AEC342C0086805B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE7CA9981AEC26E400C2B2A7 /* Main.storyboard */,
+				BEBE85D41AEC4A570086805B /* BusinessCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEBE85D51AEC4A570086805B /* BusinessCell.swift in Sources */,
 				BE7CA9971AEC26E400C2B2A7 /* ViewController.swift in Sources */,
 				BEBE85CE1AEC2EA10086805B /* Business.swift in Sources */,
 				BE7CA9951AEC26E400C2B2A7 /* AppDelegate.swift in Sources */,

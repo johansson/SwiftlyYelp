@@ -8,13 +8,32 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
-    var businesses: [Business]!
+    var businesses: [Business]! {
+        didSet {
+            bizTableView.reloadData()
+        }
+    }
+    
+    let searchBarView: UISearchBar = UISearchBar()
+    var isSearching: Bool = false
+    
+    @IBOutlet weak var bizTableView: UITableView!
+    
+    @IBAction func onTap(sender: AnyObject) {
+        searchBarView.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        bizTableView.dataSource = self
+        bizTableView.delegate = self
+        
+        searchBarView.delegate = self
+        
+        navigationItem.titleView = searchBarView
 //        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
 //            self.businesses = businesses
 //            
@@ -37,6 +56,51 @@ class BusinessesViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let businesses = businesses {
+            return businesses.count
+        }
+        
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId, forIndexPath:indexPath) as! BusinessCell
+
+        if indexPath.row >= businesses.count {
+            cell.businessNameLabel.text = ""
+            cell.businessAddressLabel.text = ""
+            cell.businessCategoryLabel.text = ""
+            cell.businessDistanceLabel.text = ""
+            cell.businessPricinessLabel.text = ""
+            return cell
+        }
+        
+        let business = businesses[indexPath.row]
+        cell.businessNameLabel.text = "\(indexPath.row + 1). \(business.name!)"
+        cell.businessAddressLabel.text = business.address
+        cell.businessReviewCountLabel.text = "\(business.reviewCount!) reviews"
+        cell.businessCategoryLabel.text = business.categories
+        cell.businessDistanceLabel.text = business.distance
+        cell.businessPricinessLabel.text = business.categories
+        cell.businessRatingImageView.setImageWithURL(business.ratingImageURL!)
+        cell.businessImageView.setImageWithURL(business.imageURL!)
+        println(business.ratingImageURL!.absoluteString)
+        return cell
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        isSearching = true
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println(searchText)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        isSearching = false
     }
 
     /*
