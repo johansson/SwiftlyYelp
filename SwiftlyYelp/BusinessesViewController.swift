@@ -69,24 +69,19 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         return 0
     }
     
+    /* not sure if i need this? seems to work without???
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let contentView: UIView = tableView.dataSource!.tableView(tableView, cellForRowAtIndexPath: indexPath)
         contentView.updateConstraintsIfNeeded()
         contentView.layoutIfNeeded()
         return contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-    }
+    }*/
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId) as! BusinessCell
-
-        if indexPath.row >= businesses.count {
-            cell.businessNameLabel.text = ""
-            cell.businessAddressLabel.text = ""
-            cell.businessCategoryLabel.text = ""
-            cell.businessDistanceLabel.text = ""
-            cell.businessPricinessLabel.text = ""
-            return cell
-        }
+        
+        let dollarChar : Character = "$"
+        let expensive = String(count:Int(arc4random_uniform(4) + 1), repeatedValue: dollarChar)
         
         let business = businesses[indexPath.row]
         cell.businessNameLabel.text = "\(indexPath.row + 1). \(business.name!)"
@@ -94,10 +89,11 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         cell.businessReviewCountLabel.text = "\(business.reviewCount!) reviews"
         cell.businessCategoryLabel.text = business.categories
         cell.businessDistanceLabel.text = business.distance
-        cell.businessPricinessLabel.text = "$$$"
+        cell.businessPricinessLabel.text = expensive
         cell.businessRatingImageView.setImageWithURL(business.ratingImageURL!)
         cell.businessImageView.setImageWithURL(business.imageURL!)
         println(business.ratingImageURL!.absoluteString)
+        
         return cell
     }
     

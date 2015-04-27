@@ -26,12 +26,14 @@ class BusinessCell: UITableViewCell {
         businessImageView.layer.cornerRadius = 3
         businessImageView.clipsToBounds = true
         
-        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+        // not sure if I need this? Seems to work without?
+        //businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+        // ditto ^?
+        //businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
     }
 }
