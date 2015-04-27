@@ -20,6 +20,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     var isSearching: Bool = false
     
     @IBOutlet weak var bizTableView: UITableView!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     @IBAction func onTap(sender: AnyObject) {
         searchBarView.endEditing(true)
@@ -30,6 +31,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         bizTableView.dataSource = self
         bizTableView.delegate = self
+        bizTableView.rowHeight = UITableViewAutomaticDimension
+        bizTableView.estimatedRowHeight = 120
         
         searchBarView.delegate = self
         
@@ -66,8 +69,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         return 0
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let contentView: UIView = tableView.dataSource!.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        contentView.updateConstraintsIfNeeded()
+        contentView.layoutIfNeeded()
+        return contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId, forIndexPath:indexPath) as! BusinessCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId) as! BusinessCell
 
         if indexPath.row >= businesses.count {
             cell.businessNameLabel.text = ""
@@ -84,7 +94,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         cell.businessReviewCountLabel.text = "\(business.reviewCount!) reviews"
         cell.businessCategoryLabel.text = business.categories
         cell.businessDistanceLabel.text = business.distance
-        cell.businessPricinessLabel.text = business.categories
+        cell.businessPricinessLabel.text = "$$$"
         cell.businessRatingImageView.setImageWithURL(business.ratingImageURL!)
         cell.businessImageView.setImageWithURL(business.imageURL!)
         println(business.ratingImageURL!.absoluteString)

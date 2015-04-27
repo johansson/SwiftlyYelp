@@ -19,4 +19,19 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var businessCategoryLabel: UILabel!
     @IBOutlet weak var businessDistanceLabel: UILabel!
     @IBOutlet weak var businessPricinessLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        businessImageView.layer.cornerRadius = 3
+        businessImageView.clipsToBounds = true
+        
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+    }
 }
