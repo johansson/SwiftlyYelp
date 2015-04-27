@@ -81,7 +81,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId) as! BusinessCell
         
         let dollarChar : Character = "$"
-        let expensive = String(count:Int(arc4random_uniform(4) + 1), repeatedValue: dollarChar)
+        let expensive = String(count:Int(arc4random_uniform(6) + 1), repeatedValue: dollarChar)
         
         let business = businesses[indexPath.row]
         cell.businessNameLabel.text = "\(indexPath.row + 1). \(business.name!)"

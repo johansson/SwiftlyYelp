@@ -8,9 +8,13 @@
 
 import UIKit
 
-class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+@objc protocol FiltersViewControllerDelegate {
+    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters: [String])
+}
 
-    let categories : [[String:String]] = [["name" : "Afghan", "code": "afghani"],
+class FiltersViewController: UIViewController, UITableViewDataSource, FilterCellDelegate {
+
+    static let categories : [[String:String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
         ["name" : "American, New", "code": "newamerican"],
         ["name" : "American, Traditional", "code": "tradamerican"],
@@ -180,13 +184,17 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         ["name" : "Wraps", "code": "wraps"],
         ["name" : "Yugoslav", "code": "yugoslav"]]
     
+    var switchStates : [Int:Bool] = [Int:Bool]()
+    
     @IBOutlet weak var filtersTableView: UITableView!
+    weak var delegate : FiltersViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filtersTableView.delegate = self
         filtersTableView.dataSource = self
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -199,22 +207,26 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func onApplyTapped(sender: AnyObject) {
+        delegate?.filtersViewController?(self, didUpdateFilters: ["foo"])
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(FilterCell.reuseId) as! FilterCell
         
-        cell.filterNameLabel.text = categories[indexPath.row]["name"]
+        cell.filterNameLabel.text = FiltersViewController.categories[indexPath.row]["name"]
+        cell.delegate = self
+        cell.filterSwitch.on = switchStates[indexPath.row] ?? false
         
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return FiltersViewController.categories.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("foo")
+    func filterCell(filterCell: FilterCell, didChangeValue value: Bool) {
+        let indexPath = filtersTableView.indexPathForCell(filterCell)!
+        switchStates[indexPath.row] = value
     }
 }
