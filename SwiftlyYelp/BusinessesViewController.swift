@@ -22,9 +22,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String]) {
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String], deals: Bool, sortMode: Int, distance: Int) {
         
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: filters, deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm("Restaurants", sort: YelpSortMode(rawValue: sortMode), categories: filters, deals: deals) { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             
             for business in businesses {

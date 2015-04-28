@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol FiltersViewControllerDelegate {
-    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters: [String], deals: Bool, sortMode: YelpSortMode, distance: Int)
+    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters: [String], deals: Bool, sortMode: Int, distance: Int)
 }
 
 class FiltersViewController: UIViewController, UITableViewDataSource, FilterCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -248,7 +248,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, FilterCell
 
         let sortMode = sortPickerValue[sortPicker.selectedRowInComponent(0)]
         
-        delegate?.filtersViewController?(self, didUpdateFilters: selectedCategories,deals: dealSwitch.on, sortMode: sortMode, distance: distanceText.text.toInt()!)
+        delegate?.filtersViewController?(self, didUpdateFilters: selectedCategories,deals: dealSwitch.on, sortMode: sortMode.rawValue, distance: distanceText.text.toInt()!)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
