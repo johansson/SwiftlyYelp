@@ -9,10 +9,31 @@
 import UIKit
 
 @objc protocol FiltersViewControllerDelegate {
-    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters: [String])
+    optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters: [String], deals: Bool, sortMode: YelpSortMode, distance: Int)
 }
 
-class FiltersViewController: UIViewController, UITableViewDataSource, FilterCellDelegate {
+class FiltersViewController: UIViewController, UITableViewDataSource, FilterCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    let sortPickerText = ["Best Match", "Distance", "Highest Rated"]
+    let sortPickerValue = [YelpSortMode.BestMatched, YelpSortMode.Distance, YelpSortMode.HighestRated]
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return sortPickerText[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+    }
+    
+    // returns the number of 'columns' to display.
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // returns the # of rows in each component..
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sortPickerText.count
+    }
 
     static let categories : [[String:String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
@@ -186,18 +207,28 @@ class FiltersViewController: UIViewController, UITableViewDataSource, FilterCell
     
     var switchStates : [Int:Bool] = [Int:Bool]()
     
+    @IBOutlet weak var dealSwitch: UISwitch!
+    
+    @IBAction func onDealSwitchValueChanged(sender: AnyObject) {
+        
+    }
+    
     @IBOutlet weak var filtersTableView: UITableView!
     weak var delegate : FiltersViewControllerDelegate?
     
+    @IBOutlet weak var sortPicker: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filtersTableView.dataSource = self
+        sortPicker.dataSource = self
+        sortPicker.delegate = self
         
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    @IBOutlet weak var distanceText: UITextField!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -207,7 +238,17 @@ class FiltersViewController: UIViewController, UITableViewDataSource, FilterCell
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func onApplyTapped(sender: AnyObject) {
-        delegate?.filtersViewController?(self, didUpdateFilters: ["foo"])
+        var selectedCategories = [String]()
+        
+        for (r, s) in switchStates {
+            if (s) {
+                selectedCategories.append(FiltersViewController.categories[r]["code"]!)
+            }
+        }
+
+        let sortMode = sortPickerValue[sortPicker.selectedRowInComponent(0)]
+        
+        delegate?.filtersViewController?(self, didUpdateFilters: selectedCategories,deals: dealSwitch.on, sortMode: sortMode, distance: distanceText.text.toInt()!)
         dismissViewControllerAnimated(true, completion: nil)
     }
     

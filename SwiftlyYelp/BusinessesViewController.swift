@@ -8,11 +8,29 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate {
 
     var businesses: [Business]! {
         didSet {
             bizTableView.reloadData()
+        }
+    }
+    
+    var searchedBusinesses: [Business]! {
+        didSet {
+            bizTableView.reloadData()
+        }
+    }
+    
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String]) {
+        
+        Business.searchWithTerm("Restaurants", sort: .Distance, categories: filters, deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            
+            for business in businesses {
+                println(business.name!)
+                println(business.address!)
+            }
         }
     }
     
@@ -32,7 +50,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         bizTableView.dataSource = self
         bizTableView.delegate = self
         bizTableView.rowHeight = UITableViewAutomaticDimension
-        bizTableView.estimatedRowHeight = 120
+        bizTableView.estimatedRowHeight = 150
         
         searchBarView.delegate = self
         
@@ -69,13 +87,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         return 0
     }
     
-    /* not sure if i need this? seems to work without???
+    /* not sure if i need this? seems to work without??? */
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let contentView: UIView = tableView.dataSource!.tableView(tableView, cellForRowAtIndexPath: indexPath)
         contentView.updateConstraintsIfNeeded()
         contentView.layoutIfNeeded()
         return contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-    }*/
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(BusinessCell.reuseId) as! BusinessCell
@@ -87,7 +105,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         cell.businessNameLabel.text = "\(indexPath.row + 1). \(business.name!)"
         cell.businessAddressLabel.text = business.address
         cell.businessReviewCountLabel.text = "\(business.reviewCount!) reviews"
-        cell.businessCategoryLabel.text = business.categories
+        cell.businessCategoryLabel.text = "asdlk asdk; adslk; ads;lk asd;lk;asd lh hkdakshj kasdjkh jsdhk asdkjh asdkjh kasdjh kasdjkh asdkjh asdkjhak sdjh k sdakjh asdkjh asdk hjkjhasd khjs dkhjasd kajhs sd kjhasd kahjsd kjh sd askdj aksdja ksjda kj ds askjda kjsdh akjsd   kj dhskajds kajhsd k  kjsd kjahsd kajhsd kjhads k kj sdkajhd kasjhdak jshdak sjdh"//business.categories
         cell.businessDistanceLabel.text = business.distance
         cell.businessPricinessLabel.text = expensive
         cell.businessRatingImageView.setImageWithURL(business.ratingImageURL!)
@@ -111,12 +129,14 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
 
     /*
     // MARK: - Navigation
-
+    */
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let nc = segue.destinationViewController as! UINavigationController
+        let fvc = nc.topViewController as! FiltersViewController
+        fvc.delegate = self
     }
-    */
 
 }

@@ -27,13 +27,13 @@ class BusinessCell: UITableViewCell {
         businessImageView.clipsToBounds = true
         
         // not sure if I need this? Seems to work without?
-        //businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         // ditto ^?
-        //businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
+        businessNameLabel.preferredMaxLayoutWidth = businessNameLabel.frame.size.width
     }
 }
